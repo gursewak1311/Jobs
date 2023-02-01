@@ -8,6 +8,6 @@
         public String? Experience { get; set; }
         public int JobID { get; set; }
 
-        public Jobs? Jobs { get; set;}
+        public Job? Jobs { get; set;}
     }
 }

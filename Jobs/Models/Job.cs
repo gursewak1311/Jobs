@@ -2,7 +2,7 @@
 
 namespace Jobs.Models
 {
-    public class Jobs
+    public class Job
     {
         public int ID { get; set; }
         public String? Title { get; set; } //'?' after string indicates that the table column can take in nullable values

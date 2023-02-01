@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Jobs.Models;
+using System.Drawing.Drawing2D;
 
 namespace Jobs.Data
 {
@@ -10,6 +11,8 @@ namespace Jobs.Data
             : base(options)
         {
         }
-        public DbSet<Jobs.Models.Company> Company { get; set; }
+        public DbSet<Job>? Jobs { get; set; }
+        public DbSet<Company>? Companies { get; set; }
+        public DbSet<Users>? Users { get; set; }
     }
 }
