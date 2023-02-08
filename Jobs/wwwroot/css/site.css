@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap');
+/* font family taken from https://fonts.google.com/specimen/Cinzel */
+
 html {
   font-size: 14px;
 }
@@ -14,5 +17,29 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+}
+footer {
+    font-size: small;
+}
+.navbar{
+    background-color: aliceblue;
+}
+h1 {
+    font-family: 'Cinzel', serif;
+}
+.btn-success{
+    background-color: cadetblue;
+    color: black;
+}
+.btn-success:hover{
+    background-color: #48929b ;
+    color: black;
+}
+.btn{
+    padding:4px;
+}
+.text-dark:hover{
+    font-size:14px;
+    font-weight:bold;
 }
