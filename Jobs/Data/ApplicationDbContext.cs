@@ -11,6 +11,7 @@ namespace Jobs.Data
             : base(options)
         {
         }
+        //making the tables in database from the model classes
         public DbSet<Job>? Jobs { get; set; }
         public DbSet<Company>? Companies { get; set; }
         public DbSet<Users>? Users { get; set; }
