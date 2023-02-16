@@ -48,7 +48,7 @@ namespace Jobs.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
-            ViewData["JobID"] = new SelectList(_context.Jobs, "ID", "ID");
+            ViewData["JobID"] = new SelectList(_context.Jobs, "ID", "Title");
             return View();
         }
 
@@ -82,7 +82,7 @@ namespace Jobs.Controllers
             {
                 return NotFound();
             }
-            ViewData["JobID"] = new SelectList(_context.Jobs, "ID", "ID", users.JobID);
+            ViewData["JobID"] = new SelectList(_context.Jobs, "ID", "Title", users.JobID);
             return View(users);
         }
 
@@ -118,7 +118,7 @@ namespace Jobs.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["JobID"] = new SelectList(_context.Jobs, "ID", "ID", users.JobID);
+            ViewData["JobID"] = new SelectList(_context.Jobs, "ID", "Title", users.JobID);
             return View(users);
         }
 
