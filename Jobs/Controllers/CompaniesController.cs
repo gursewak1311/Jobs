@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Jobs.Data;
 using Jobs.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Jobs.Controllers
 {
+    [Authorize]
     public class CompaniesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -18,7 +20,7 @@ namespace Jobs.Controllers
         {
             _context = context;
         }
-
+        [AllowAnonymous]
         // GET: Companies
         public async Task<IActionResult> Index()
         {
@@ -26,6 +28,7 @@ namespace Jobs.Controllers
         }
 
         // GET: Companies/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Companies == null)
