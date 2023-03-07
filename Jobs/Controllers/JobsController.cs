@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Jobs.Data;
 using Jobs.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Jobs.Controllers
 {
+    
     public class JobsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -44,7 +46,7 @@ namespace Jobs.Controllers
 
             return View(job);
         }
-
+        [Authorize]
         // GET: Jobs/Create
         public IActionResult Create()
         {
@@ -57,6 +59,7 @@ namespace Jobs.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("ID,Title,Description,Category,CompanyID")] Job job)
         {
             if (ModelState.IsValid)
@@ -70,6 +73,7 @@ namespace Jobs.Controllers
         }
 
         // GET: Jobs/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Jobs == null)
@@ -91,6 +95,7 @@ namespace Jobs.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Description,Category,CompanyID")] Job job)
         {
             if (id != job.ID)
@@ -123,6 +128,7 @@ namespace Jobs.Controllers
         }
 
         // GET: Jobs/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Jobs == null)
@@ -144,6 +150,7 @@ namespace Jobs.Controllers
         // POST: Jobs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Jobs == null)
@@ -159,7 +166,7 @@ namespace Jobs.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        [Authorize]
         private bool JobExists(int id)
         {
           return _context.Jobs.Any(e => e.ID == id);
