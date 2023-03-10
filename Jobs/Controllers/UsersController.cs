@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Jobs.Data;
 using Jobs.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Jobs.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -18,14 +20,14 @@ namespace Jobs.Controllers
         {
             _context = context;
         }
-
+        [AllowAnonymous]
         // GET: Users
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Users.Include(u => u.Jobs);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        [AllowAnonymous]
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
