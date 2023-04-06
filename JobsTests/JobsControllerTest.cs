@@ -19,7 +19,8 @@ namespace JobsTests
     {
         private JobsController _controller;
         private ApplicationDbContext _context;
-        private Company _company;
+        //creating a list for the companies
+        private List<Company> _company = new List<Company>();
 
 
         //will run before each test method
@@ -34,43 +35,63 @@ namespace JobsTests
             _context = new ApplicationDbContext(dbOptions);
 
             // Mock company
-            _company = new Company
+            _company.Add(new Company
             {
                 Id = 100,
                 Name = "Mock Company",
                 Location = "Barrie",
                 FieldOfWork = "IT",
-            };
-            _context.Companies.Add(_company);
-
-            _company = new Company
+            });
+            
+            _company.Add(new Company
             {
                 Id = 200,
                 Name = "Mock Company 2",
                 Location = "Kitchener",
                 FieldOfWork = "Furniture",
-            };
-            _context.Companies.Add(_company);
+            });
 
-           //saving the changes
+            _company.Add(new Company
+            {
+                Id = 300,
+                Name = "Mock Company 3",
+                Location = "Toronto",
+                FieldOfWork = "Automotive",
+            });
+
+            foreach (var company in _company)
+            {
+                _context.Companies.Add(company);
+            }
+
+            //saving the changes
             _context.SaveChanges();
 
             _controller = new JobsController(_context);
         }
 
         [TestMethod]
-        public void IndexReturnsCorrectView()
+        public void CreateReturnsCorrectView()
         {
             var controller = _controller;
             var result = (ViewResult)controller.Create();
             Assert.AreEqual("Create",result.ViewName);
         }
         [TestMethod]
-        public void IndexIsNotNull()
+        public void CreateIsNotNull()
         {
             var controller = _controller;
             var result = controller.Create();
             Assert.IsNotNull(result);
+        }
+        [TestMethod]
+        public void CreateIsHavingRightInfoOnCompanies()
+        {
+            //this test checks that the company ID and Name is sent to the view
+            var controller = _controller;
+            var result = (ViewResult)controller.Create();
+            var mockCompanies = new SelectList(_context.Companies, "Id", "Name");
+            Assert.ReferenceEquals(mockCompanies,result.ViewData["CompanyID"]);
         }
     }
 }
