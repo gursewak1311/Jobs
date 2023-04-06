@@ -51,7 +51,7 @@ namespace Jobs.Controllers
         public IActionResult Create()
         {
             ViewData["CompanyID"] = new SelectList(_context.Companies, "Id", "Name");
-            return View();
+            return View("Create");
         }
 
         // POST: Jobs/Create
